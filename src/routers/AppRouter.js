@@ -6,7 +6,7 @@ import { AuthRouter } from './AuthRouter';
 export const AppRouter = () => {
   return (
         <Routes>
-            <Route path="/auth" element={ <AuthRouter /> }/>
+            <Route path="/auth/*" element={ <AuthRouter /> }/>
             <Route path="/" element={ <JournalScreen /> }/>
             <Route path="*" element={ <AuthRouter /> }/>
         </Routes>

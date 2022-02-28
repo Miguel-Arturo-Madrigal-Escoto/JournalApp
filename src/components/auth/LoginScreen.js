@@ -1,23 +1,48 @@
-import React, { Fragment} from 'react';
+import React, { Fragment,} from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { login, startLoginEmailPassword } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
-  return (
+
+    const dispatch = useDispatch(); /* hacer dispatch de acciones, sobre los reducers del store */
+    
+    const [ formValues, handleInputChange, ] = useForm({
+        email: '',
+        password: ''
+    })
+
+    const { email, password } = formValues;
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        /* hacer el dispatch de la acción, useDispatch = dispatch del useReducer */
+        dispatch(startLoginEmailPassword(email, password));
+    }
+
+    
+    return (
         <Fragment>
             <h3 className="auth__title">Login</h3>
-            <form>
+            <form onSubmit={ handleLogin }>
                 <input
                     type="text"
                     placeholder="Email"
                     name="email"
                     className="auth__input"
                     autoComplete="off"
+                    value={ email }
+                    onChange={ handleInputChange }
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     name="password"
                     className="auth__input"
+                    value={ password }
+                    onChange={ handleInputChange }
                 />
                 <button
                     type="submit"
