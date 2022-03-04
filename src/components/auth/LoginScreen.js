@@ -1,7 +1,7 @@
 import React, { Fragment,} from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login, startLoginEmailPassword } from '../../actions/auth';
+import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
@@ -20,6 +20,11 @@ export const LoginScreen = () => {
 
         /* hacer el dispatch de la acción, useDispatch = dispatch del useReducer */
         dispatch(startLoginEmailPassword(email, password));
+    }
+
+    const handleLoginWithGoogle = () => {
+        //hace la autenticación con google
+        dispatch(startGoogleLogin());
     }
 
     
@@ -55,6 +60,7 @@ export const LoginScreen = () => {
                     <p>Login with social networks</p>
                     <div 
                         className="google-btn"
+                        onClick={ handleLoginWithGoogle }
                     >
                         <div className="google-icon-wrapper">
                             <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />

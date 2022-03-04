@@ -1,3 +1,5 @@
+import { getAuth, signInWithPopup } from 'firebase/auth';
+import { db, googleAuthProvider } from '../firebase/firebase-config'
 import { types } from '../types/types';
 
 /*
@@ -15,6 +17,19 @@ export const startLoginEmailPassword = (email, password) => {
             dispatch(login(123456, 'Pedro'));
 
         }, 3500);
+    }
+}
+
+//acción de google
+export const startGoogleLogin = () => {
+    return ( dispatch ) => {
+        const auth = getAuth();
+
+        // recibe el auth y el método de autenticacion, es decir, google (github, facebook, etc)
+        signInWithPopup(auth, googleAuthProvider )
+            .then( ({ user }) => {
+                dispatch(login(user.uid, user.displayName));
+            });
     }
 }
 
