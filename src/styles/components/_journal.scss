@@ -105,3 +105,39 @@
 .journal__entry-date-box span {
     font-size: 12px;
 }
+.journal__sidebar-navbar{
+    margin: 0 auto;
+}
+
+.journal__profile {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.journal__profile-img{
+    border-radius: 50%;
+    width: 20%;
+}
+
+.journal__logout {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary;
+    padding: 2px 5px;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+    &:hover {
+        background-color: darken($color: $primary, $amount: 10);
+    }
+    margin-bottom: 80px;
+}
+
+.journal__logout button {
+    font-size: 16px;
+    
+}

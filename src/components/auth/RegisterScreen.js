@@ -1,9 +1,22 @@
 import React, { Fragment } from 'react';
+import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import validator from 'validator';
- 
+import { removeError, setError } from '../../actions/ui';
+import { startRegisterWithEmailPasswordName } from '../../actions/auth';
+
+
 export const RegisterScreen = () => {
+
+    //useDispatch: llamar a los reducers del combineReducers
+    //useSelector: obtener información del state, recibe un callback
+    const dispatch = useDispatch();
+    // const state = useSelector(state => state);
+    const { msgError } = useSelector(({ ui }) => ui);
+
+    //console.log(msgError)
 
     const [ formValues, handleInputChange ] = useForm({
         name: '',
@@ -17,22 +30,25 @@ export const RegisterScreen = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            console.log('Form correct')
+            dispatch(startRegisterWithEmailPasswordName(email, password, name));  
         }
     }
+    //hacer los dispatch con las acciones a los reducers de
+    //redux
 
     const isFormValid = () => {
         if (validator.isEmpty(name)) {
-            console.log('Invalid name');
+            dispatch(setError('El nombre no debe de estar vacío'));
             return false;
         } else if (!validator.isEmail(email)) {
-            console.log('Invalid email');
+            dispatch(setError('El email es inválido'));
             return false;
-        } else if ((!validator.equals(password, password2)) || (!validator.isStrongPassword(password, [{ minLenght: 5 }]))) {
-            console.log('Invalid password');
+        } else if ((!validator.equals(password, password2)) || (!validator.isStrongPassword(password, { minLength: 5 }))) {
+            dispatch(setError('Contraseñas invalidas y/o no coinciden'));
             return false;
         }
         
+        dispatch(removeError());
         return true;
     }
 
@@ -40,10 +56,20 @@ export const RegisterScreen = () => {
         <Fragment>
             <h3 className="auth__title">Register</h3>
             <form onSubmit={ handleRegister }>
-
-                <div className="auth__alert-error">
-                    Hola mundo
-                </div>
+                {
+                    msgError && 
+                    (
+                        <div>
+                            { Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: msgError
+                            }) }
+                        </div>
+                        
+                    )
+                }
+                
 
                 <input
                     type="text"

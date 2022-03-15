@@ -1,12 +1,18 @@
 import React, { Fragment,} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
+import { startLoading } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
 
     const dispatch = useDispatch(); /* hacer dispatch de acciones, sobre los reducers del store */
+
+    const { loading } = useSelector(state => state.ui);
+    // const state = useSelector(state => state);
+
+    // console.log(state)
     
     const [ formValues, handleInputChange, ] = useForm({
         email: '',
@@ -17,7 +23,6 @@ export const LoginScreen = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-
         /* hacer el dispatch de la acción, useDispatch = dispatch del useReducer */
         dispatch(startLoginEmailPassword(email, password));
     }
@@ -52,6 +57,7 @@ export const LoginScreen = () => {
                 <button
                     type="submit"
                     className="btn btn-primary btn-block"
+                    disabled={ loading }
                 >
                     Login
                 </button>
@@ -76,7 +82,6 @@ export const LoginScreen = () => {
                 >
                     Create new account
                 </Link>
-
             </form>
         </Fragment>
     )

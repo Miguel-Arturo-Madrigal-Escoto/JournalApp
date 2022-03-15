@@ -8,9 +8,9 @@ export const AuthRouter = () => {
         <div className="auth__main">
             <div className="auth__box-container">
                 <Routes>
-                    <Route path="/auth/login" element={ <LoginScreen />} />
-                    <Route path="/auth/register" element={ <RegisterScreen />} />
-                    <Route path="/*" element={ <LoginScreen /> } />
+                    <Route path="login" element={ <LoginScreen />} />
+                    <Route path="register" element={ <RegisterScreen />} />
+                    <Route path="*" element={ <LoginScreen /> } />
                 </Routes>
             </div>  
         </div>
