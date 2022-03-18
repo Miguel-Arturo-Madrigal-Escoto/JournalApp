@@ -76,3 +76,22 @@
     width: 100%;
 }
 
+.btn-danger {
+    background-color: rgb(207, 66, 66);
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        background-color: darken($color: rgb(207, 66, 66), $amount: 10);
+    }
+}
+
+
+.btn-success {
+    background-color: rgb(76, 200, 76);
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        background-color: darken($color: rgb(76, 200, 76), $amount: 10);
+    }
+}
+

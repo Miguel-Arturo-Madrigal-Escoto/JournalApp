@@ -74,6 +74,8 @@
     margin-bottom: 10px;
     overflow: hidden;
     font-size: 12px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .journal__entry-picture {

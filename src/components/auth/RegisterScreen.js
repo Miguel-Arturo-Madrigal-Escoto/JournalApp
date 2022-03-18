@@ -43,7 +43,8 @@ export const RegisterScreen = () => {
         } else if (!validator.isEmail(email)) {
             dispatch(setError('El email es inválido'));
             return false;
-        } else if ((!validator.equals(password, password2)) || (!validator.isStrongPassword(password, { minLength: 5 }))) {
+        } else if ((!validator.equals(password, password2))) {
+            //  (!validator.isStrongPassword(password, { minLength: 5 }))
             dispatch(setError('Contraseñas invalidas y/o no coinciden'));
             return false;
         }
@@ -55,7 +56,7 @@ export const RegisterScreen = () => {
     return (
         <Fragment>
             <h3 className="auth__title">Register</h3>
-            <form onSubmit={ handleRegister }>
+            <form onSubmit={ handleRegister } className="animate__animated animate__fadeIn animate_faster">
                 {
                     msgError && 
                     (

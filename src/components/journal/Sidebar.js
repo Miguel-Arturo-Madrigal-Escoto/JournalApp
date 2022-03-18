@@ -4,6 +4,7 @@ import { startLogout } from '../../actions/auth';
 import { JournalEntries } from './JournalEntries';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { BsFillCalendarPlusFill } from 'react-icons/bs';
+import { startNewNote } from '../../actions/notes';
 
 export const Sidebar = () => {
 
@@ -14,6 +15,10 @@ export const Sidebar = () => {
     const handleLogOut = (e) => {
         e.preventDefault();
         dispatch(startLogout());
+    }
+
+    const handleAddEntry = () => {
+        dispatch(startNewNote())
     }
 
     return (
@@ -29,7 +34,10 @@ export const Sidebar = () => {
                 
             </div>
 
-            <div className="journal__new-entry pointer">
+            <div 
+                className="journal__new-entry pointer"
+                onClick={ handleAddEntry }
+            >
                 {/* <i className="far fa-calendar-plus fa-5x"></i> */}
                 <BsFillCalendarPlusFill fontSize="2.5rem" color="#fff" />
                 <p className="mt-5">

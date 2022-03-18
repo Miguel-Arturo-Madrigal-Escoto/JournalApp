@@ -10,6 +10,7 @@ import { PublicRoute } from './PublicRoute';
 
 // loading icon
 import { BallTriangle } from  'react-loader-spinner';
+import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
 
@@ -22,11 +23,13 @@ export const AppRouter = () => {
     useEffect(() => {
 
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => { //observable, por lo que las dependencias pueden ser = []
+        onAuthStateChanged(auth, async (user) => { //observable, por lo que las dependencias pueden ser = []
             
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName, user.photoURL));
                 setIsLoggedIn(true);
+
+                dispatch(startLoadingNotes(user.uid));
             } else {
                 setIsLoggedIn(false);
             }

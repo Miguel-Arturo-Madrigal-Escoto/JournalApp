@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, si
 import { db, googleAuthProvider } from '../firebase/firebase-config'
 import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
+import { noteLogout } from './notes';
 
 /*
  antes, el login llamaba al dispatch con la accion sincrona login,
@@ -103,6 +104,7 @@ export const startLogout = () => {
         await signOut(auth);
         
         dispatch(logout());
+        dispatch(noteLogout());
     }
 }
 

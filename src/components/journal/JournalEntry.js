@@ -1,27 +1,44 @@
-import React from 'react'
+import React from 'react';
+import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
+import { activeNote } from '../../actions/notes';
+// advancedFormat permite usar la fecha ordinal entre otras opciones
+const advancedFormat = require('dayjs/plugin/advancedFormat');
+dayjs.extend(advancedFormat);
 
-export const JournalEntry = () => {
-  return (
-        <div className="journal__entry pointer">
-            <div 
-                className="journal__entry-picture"
-                style={{
-                    backgroundSize: 'cover',
-                    backgroundImage: 'url(https://picsum.photos/200/300?random=1)'
-                }}
-            >
-            </div>
+export const JournalEntry = ({ id, date, title, body, url}) => {
+    const day = dayjs(date);
+    const dispatch = useDispatch();
+
+    const handleEntryClick = (e) => {
+        e.preventDefault()
+        dispatch(activeNote(id, { date, title, body, url }));
+    }
+
+    return (
+        <div className="journal__entry pointer animate__animated animate__fadeInDown animate_faster" onClick={ handleEntryClick }>
+            {
+                
+                <div 
+                    className="journal__entry-picture"
+                    style={{
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${ url })`
+                    }
+                    }
+                > </div>
+            }
             <div className="journal__entry-body">
                 <p className="journal__entry-title">
-                    Un nuevo dia
+                    { title }
                 </p>
                 <p className="journal__entry-content">
-                    Sint voluptate quis eiusmod esse esse proident adipisicing veniam excepteur ea adipisicing.
+                    { body }
                 </p>
             </div>
             <div className="journal__entry-date-box">
-                <span>Monday</span>
-                <h4>28</h4>
+                <span>{ day.format('dddd') }</span>
+                <h4>{ day.format('Do') }</h4>
             </div>
 
         </div>
