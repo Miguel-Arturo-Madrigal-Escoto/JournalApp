@@ -1,6 +1,5 @@
 {
   "name": "journal-app",
-  "homepage": "https://miguel-arturo-madrigal-escoto.github.io/JournalApp/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

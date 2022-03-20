@@ -27,9 +27,11 @@ export const NoteScreen = () => {
     // actualizar nota activa
     useEffect(() => {
 
-        dispatch(activeNote(id, { ...formValues, url: note.url }));
+        if (formValues !== note) {
+            dispatch(activeNote(id, { ...formValues, url: note.url }));
+        }
 
-    }, [formValues, dispatch, id, note.url]);
+    }, [formValues, dispatch]);
 
     const handleDelete = () => {
         dispatch(startDeleting(id));

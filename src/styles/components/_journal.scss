@@ -143,3 +143,17 @@
     font-size: 16px;
     
 }
+
+@media (max-width: 768px){
+
+
+    .journal__main-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .journal__sidebar {
+        width: 100%;
+    }
+}
+

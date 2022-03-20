@@ -1,4 +1,4 @@
-import React, { Fragment,} from 'react';
+import React, {Fragment,} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
@@ -13,7 +13,7 @@ export const LoginScreen = () => {
     // const state = useSelector(state => state);
 
     // console.log(state)
-    
+
     const [ formValues, handleInputChange, ] = useForm({
         email: '',
         password: ''
@@ -79,6 +79,7 @@ export const LoginScreen = () => {
                 <Link 
                     to="/auth/register"
                     className="link"
+
                 >
                     Create new account
                 </Link>
